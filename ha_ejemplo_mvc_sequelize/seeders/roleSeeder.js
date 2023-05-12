@@ -2,7 +2,7 @@ const { Role } = require("../models");
 
 module.exports = async () => {
   const roles = [];
-  const crud = ["admin", "editor", "writer", "reader"]  
+  const crud = ["reader", "writer", "editor", "admin"];
   for (let i = 0; i <= 3; i++) {
     roles.push({
       role: crud[i],

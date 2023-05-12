@@ -38,15 +38,7 @@ async function store(req, res) {
   return res.redirect("/panel");
 }
 
-async function newComment(req, res) {
-  const { newName, newContent } = req.body;
-  const newComment = await Comment.create({
-    content: newContent,
-    name: newName,
-    articleId: req.params.id,
-  });
-  return res.redirect(`/articulos/${req.params.id}`);
-}
+
 
 // Show the form for editing the specified resource.
 async function edit(req, res) {
@@ -77,17 +69,21 @@ async function destroy(req, res) {
 
 // POST comment
 async function newComment(req, res) {
-  const { newName, newContent } = req.body;
-  if(newContent.length > 0){
-  const newComment = await Comment.create({
-    content: newContent,
-    name: newName,
-    articleId: req.params.id,
- 
+   const { name, content } = req.body;
+  if(content.length > 0){
+   await Comment.create({
+    content,
+    name,
+    articleId: req.params.id, 
   });
-  }
+}else{
+  req.flash("info", "the comment must have content");
+  res.redirect("/")
+}
   return res.redirect(`/articulos/${req.params.id}`);
 }
+
+
 
 module.exports = {
   index,

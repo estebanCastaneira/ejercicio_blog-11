@@ -35,9 +35,17 @@
         <h5 class="comment">Add your comment</h5>
         <form method="post">
           <!-- Name input -->
-          <div class="form-outline">
+          <div class="form-outline my-2">
          <% if(locals.isAuthenticated){ %>
-          <label class="form-label" for="form4Example1"><%=locals.user.firstname%> <%= locals.user.lastname%></label>
+          <input
+            readonly 
+            name="name"
+            type="text"
+            class="form-control-plaintext"
+            id="firstname"
+            aria-describedby="firstname"
+            value="<%=locals.user.firstname%> <%= locals.user.lastname%>"
+            />
           <% } %>
           </div>
 
@@ -47,12 +55,13 @@
               class="form-control"
               rows="4"
               placeholder="Message"
-              name="newContent"
+              name="content"
             ></textarea>
           </div>
 
-          <!-- Submit button -->
+          <div class="my-5">
           <button type="submit" class="btn btn-primary btn-block w-100">Send</button>
+          </div>
         </form>
       </div>
       <div>

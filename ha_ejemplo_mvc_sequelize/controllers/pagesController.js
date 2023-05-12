@@ -55,6 +55,7 @@ async function showPanel(req, res) {
     ],
   })
   res.render("admin", { 
+    articles,
     userArticles,
     user,
     format,
