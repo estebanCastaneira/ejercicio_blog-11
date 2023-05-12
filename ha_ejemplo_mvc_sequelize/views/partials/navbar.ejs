@@ -4,6 +4,7 @@
     <div>
       <% if( locals.isAuthenticated) { %>
       <a class="btn btn-primary" href="/panel" role="button">Admin</a>
+      <a class="btn btn-light" href="/usuarios" role="button">Usuarios</a>
       <a class="btn btn-danger" href="/logout" role="button">Logout</a>
       <p style="color: white ">Welcome, <%=locals.user.firstname%></p>
       <% }else { %>

@@ -57,7 +57,7 @@ async function edit(req, res) {
 
 // Update the specified resource in storage.
 async function update(req, res) {
-  const editArticle = await Article.update(
+    await Article.update(
     {
       title: req.body.title,
       content: req.body.content,

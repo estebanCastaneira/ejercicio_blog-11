@@ -1,15 +1,27 @@
-const { User } = require("../models");
+const { User, Role } = require("../models");
 const bcrypt = require("bcryptjs");
+const {format } = require("date-fns");
+const { es } = require("date-fns/locale");
 
 // Display a listing of the resource.
-async function index(req, res) {}
+async function index(req, res) {
+  const users = await User.findAll( {include: Role});
+  return res.render("userIndex", {
+    users,
+    format,
+    es
+  })
+}
 
 // Display the specified resource.
 async function show(req, res) {}
 
 // Show the form for creating a new resource
 async function create(req, res) {
-  res.render("userRegister");
+  const user = await User.findByPk(req.params.id);
+ 
+
+  res.render("userRegister", { user });
 }
 
 // Store a newly created resource in storage.
@@ -20,14 +32,12 @@ async function store(req, res) {
       firstname: req.body.firstname,
       lastname: req.body.lastname,
       password: await bcrypt.hash(req.body.password, 5),
+      roleId: req.body.roleId
     },
   });
   if (created) {
-    req.login(user, () => {
       req.flash("success", "User created succesfully");
-      res.redirect("/panel")
-    }
-      );
+      res.redirect("back");
   } else {
     req.flash("info", "User already exists, please log in");
     res.redirect("/login");
@@ -35,13 +45,32 @@ async function store(req, res) {
 }
 
 // Show the form for editing the specified resource.
-async function edit(req, res) {}
+async function edit(req, res) {
+  const user = await User.findByPk(req.params.id)
+  return res.render("userEdit", { user })
+}
 
 // Update the specified resource in storage.
-async function update(req, res) {}
+async function update(req, res) {
+      await User.update(
+    {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      password: await bcrypt.hash(req.body.password, 5),
+      roleId: req.body.roleId
+    },
+    {
+      where: { id: req.params.id },
+    },
+  );
+  return res.redirect("/panel");
+}
 
 // Remove the specified resource from storage.
-async function destroy(req, res) {}
+async function destroy(req, res) {
+  await User.destroy({ where: { id: req.params.id } });
+  return res.redirect("back");
+}
 
 // Otros handlers...
 

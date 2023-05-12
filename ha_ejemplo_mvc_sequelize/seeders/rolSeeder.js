@@ -1,14 +1,14 @@
-const { Rol } = require("../models");
+const { Role } = require("../models");
 
 module.exports = async () => {
-  const rols = [];
+  const roles = [];
   const crud = ["admin", "editor", "writer", "reader"]  
   for (let i = 0; i <= 3; i++) {
-    rols.push({
-      rol: crud[i],
+    roles.push({
+      role: crud[i],
     });
   }
 
-  await Rol.bulkCreate(rols);
-  console.log("[Database] Se corrió el seeder de Rols.");
+  await Role.bulkCreate(roles);
+  console.log("[Database] Se corrió el seeder de Roles.");
 };
