@@ -52,7 +52,7 @@ function passportConfig() {
   });
   passport.deserializeUser(async (id, done) => {
     try {
-      const user = await User.findByPk(id);
+      const user = await User.findByPk(id , {include: "role"});
       return done(null, user); // Usuario queda disponible en req.user.
     } catch (err) {
       return done(err);

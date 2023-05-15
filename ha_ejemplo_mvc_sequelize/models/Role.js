@@ -7,7 +7,6 @@ class Role extends Model {
         id: {
           type: DataTypes.BIGINT.UNSIGNED,
           primaryKey: true,
-          autoIncrement: true,
         },
         role: {
           type: DataTypes.STRING,
