@@ -37,8 +37,7 @@
           </tr>
         </thead>
         <tbody>
-          <% if(locals.user.roleId === 1){ %>
-          <% for (const article of articles) { %>
+          <% for(const article of articles) { %>
             <tr>
               <th scope="row">
                 <%= article.id %>
@@ -65,27 +64,6 @@
               </td>
             </tr>
             <% } %>
-            <% } %>
-          <% if(locals.user.roleId === 3){ %>
-          <% for (const article of userArticles) { %>
-          <tr>
-            <th scope="row"><%= article.id %></th>
-            <td><%= article.title %></td>
-            <td><%= article.content.substring(0, 80)+"..." %></td>
-            <td><%=format(new Date(String(article.createdAt)), "yyyy'-'MM'-'dd kk:mm:ss" );%></td>
-            <td><%= article.user.firstname%> <%= article.user.lastname%></td>
-
-            <td>
-              <a class="btn btn-primary mb-1" method="GET" href="/articulos/<%= article.id%>/editar"
-                >Editar</a
-              >
-              <form method="POST" action="/articulos/<%=article.id%>?_method=DELETE">
-                <button type="submit" class="btn btn-danger mb-1">Eliminar</button>
-              </form>
-            </td>
-          </tr>
-          <% } %>
-          <% } %>
         </tbody>
       </table>
     </div>

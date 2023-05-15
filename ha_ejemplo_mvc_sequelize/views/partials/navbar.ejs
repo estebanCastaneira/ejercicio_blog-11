@@ -3,9 +3,9 @@
     <a class="navbar-brand text-light bg-dark" href="/">Hack the Blog</a>
     <div>
       <% if( locals.isAuthenticated ) { %>
-        <% if( locals.user.roleId !== 4){ %>
+        <% if( locals.user.roleId !== 100){ %>
       <a class="btn btn-primary" href="/panel" role="button">Admin</a>
-          <% if( locals.user.roleId === 1){ %>
+          <% if( locals.user.roleId === 400){ %>
       <a class="btn btn-light" href="/usuarios" role="button">Usuarios</a>
       <% } %>
     

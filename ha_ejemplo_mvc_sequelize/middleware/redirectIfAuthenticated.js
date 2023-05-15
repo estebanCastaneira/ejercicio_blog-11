@@ -1,6 +1,6 @@
 function redirectIfAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
-    res.redirect("/"); // 👉 Cambiar "/" por la ruta a donde se quiere redirigir al usuario. También se puede dejar como está.
+    res.redirect("/");
   } else {
     return next();
   }

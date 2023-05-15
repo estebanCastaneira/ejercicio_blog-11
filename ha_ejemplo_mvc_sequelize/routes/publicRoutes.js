@@ -3,7 +3,7 @@ const router = express.Router();
 const pagesController = require("../controllers/pagesController");
 const authController = require("../controllers/authController");
 const redirectIfAuthenticated = require("../middleware/redirectIfAuthenticated");
-const makeUserAvailableInViews = require("../middleware/makeUserAvailableInViews");
+
 
 router.get("/", pagesController.showHome);
 router.get("/login", redirectIfAuthenticated, authController.showLogin);
