@@ -1,6 +1,6 @@
 const {Article, User, Comment} = require("../models")
 async function isAdmin(req, res, next){
-    if(req.user.roleId === 400){
+    if(req.user.roleId >= 400){
       const articles = await Article.findAll({
       include: [
         {

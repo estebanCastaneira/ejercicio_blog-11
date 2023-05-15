@@ -5,10 +5,9 @@
       <% if( locals.isAuthenticated ) { %>
         <% if( locals.user.roleId !== 100){ %>
       <a class="btn btn-primary" href="/panel" role="button">Admin</a>
-          <% if( locals.user.roleId === 400){ %>
+          <% if( locals.user.roleId >= 400){ %>
       <a class="btn btn-light" href="/usuarios" role="button">Usuarios</a>
       <% } %>
-    
       <% } %>
         <a class="btn btn-danger" href="/logout" role="button">Log Out</a>
       <p style="color: white ">Welcome, <%=locals.user.firstname%></p>
