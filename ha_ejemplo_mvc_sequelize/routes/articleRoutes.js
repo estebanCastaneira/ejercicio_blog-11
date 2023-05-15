@@ -3,19 +3,23 @@ const router = express.Router();
 const articleController = require("../controllers/articleController");
 const ensureAuthenticated = require("../middleware/ensureAuthenticated");
 
+const isAtLeastWriter = require("../middleware/isAtLeastWriter");
+const isAtLeastEditor = require("../middleware/isAtLeastEditor");
+const isAdmin = require("../middleware/isAdmin");
+
 
 
 // Rutas relacionadas a los artículos:
 // ...
 
 router.get("/", articleController.index);
-router.get("/crear",ensureAuthenticated, articleController.create);
+router.get("/crear",ensureAuthenticated, isAdmin, articleController.create);
 router.post("/", articleController.store);
 router.get("/:id", articleController.show);
-router.get("/:id/editar",ensureAuthenticated, articleController.edit);
+router.get("/:id/editar",ensureAuthenticated, isAtLeastWriter, isAtLeastEditor, articleController.edit);
 router.post("/:id",ensureAuthenticated, articleController.newComment);
 
 router.patch("/:id", articleController.update);
-router.delete("/:id", articleController.destroy);
+router.delete("/:id", isAtLeastEditor, articleController.destroy);
 
 module.exports = router;

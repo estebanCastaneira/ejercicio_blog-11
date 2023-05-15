@@ -37,7 +37,7 @@
           </tr>
         </thead>
         <tbody>
-          <% for(const article of articles) { %>
+          <% for(const article of locals.user.articles) { %>
             <tr>
               <th scope="row">
                 <%= article.id %>
@@ -46,7 +46,7 @@
                 <%= article.title %>
               </td>
               <td>
-                <%= article.content.substring(0, 80)+"..." %>
+                <%= article.content.substring(0, 80)+"..."%>
               </td>
               <td>
                 <%=format(new Date(String(article.createdAt)), "yyyy'-'MM'-'dd kk:mm:ss" );%>

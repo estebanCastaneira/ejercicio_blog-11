@@ -18,7 +18,7 @@
         <div class="py-2 border-bottom">
           <h3>Create new article</h3>
         </div>
-        <% console.log(locals.user.users) %>
+
         <form method="POST" action="/articulos">
           <div class="my-3">
             <select class="form-select" aria-label="Default select example" name="userId">
@@ -31,9 +31,9 @@
                 </option>
                 <%}%>
                 <%} else{ %>
-                <option value="<%=user.id%>">
-                  <%= user.firstname%>
-                    <%= user.lastname%>
+                <option value="<%=locals.user.id%>">
+                  <%= locals.user.firstname%>
+                    <%= locals.user.lastname%>
                 </option>
                 <% } %>
             </select>

@@ -24,8 +24,8 @@ async function show(req, res) {
 
 // Show the form for creating a new resource
 async function create(req, res) {
-  const users = await User.findAll();
-  return res.render("createArticle", { users });
+  //const users = await User.findAll();
+  return res.render("createArticle");
 }
 
 // Store a newly created resource in storage.
@@ -42,9 +42,9 @@ async function store(req, res) {
 
 // Show the form for editing the specified resource.
 async function edit(req, res) {
-  const articles = await Article.findByPk(req.params.id);
-  const users = await User.findAll();
-  return res.render("editArticle", { articles, users });
+  // const articles = await Article.findByPk(req.params.id);
+  // const users = await User.findAll();
+  return res.render("editArticle");
 }
 
 // Update the specified resource in storage.
@@ -53,6 +53,7 @@ async function update(req, res) {
     {
       title: req.body.title,
       content: req.body.content,
+      userId : req.body.userId
     },
     {
       where: { id: req.params.id },
@@ -63,7 +64,21 @@ async function update(req, res) {
 
 // Remove the specified resource from storage.
 async function destroy(req, res) {
-  const deleteArticle = await Article.destroy({ where: { id: req.params.id } });
+  if(req.user.roleId === 400) {
+    await Article.destroy({ 
+      where:{
+        id: req.params.id
+      }
+    })
+  }else {
+    await Article.destroy({ 
+      where: { 
+        id: req.params.id,
+        userId: req.user.id
+      }
+   });
+  }
+  req.flash("success", "Article deleted succesfully")
   return res.redirect("/panel");
 }
 

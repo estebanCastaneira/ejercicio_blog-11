@@ -34,30 +34,30 @@ async function showHome(req, res) {
 }
 
 async function showPanel(req, res) {
-  const articles = await Article.findAll({
-    include: [
-      {
-        model: User,
-        attributes: ["id", "firstname", "lastname"],
-      },
-    ],
-  });
-  const user = req.user;
-  const userArticles = await Article.findAll({
-    where:{
-      userId: user.id
-    },
-    include: [
-      {
-        model: User,
-        attributes: ["id", "firstname", "lastname"],
-      },
-    ],
-  })
+  // const articles = await Article.findAll({
+  //   include: [
+  //     {
+  //       model: User,
+  //       attributes: ["id", "firstname", "lastname"],
+  //     },
+  //   ],
+  // });
+  // const user = req.user;
+  // const userArticles = await Article.findAll({
+  //   where:{
+  //     userId: user.id
+  //   },
+  //   include: [
+  //     {
+  //       model: User,
+  //       attributes: ["id", "firstname", "lastname"],
+  //     },
+  //   ],
+  // })
   res.render("admin", { 
-    articles,
-    userArticles,
-    user,
+    // articles,
+    // userArticles,
+    // user,
     format,
     es
    });

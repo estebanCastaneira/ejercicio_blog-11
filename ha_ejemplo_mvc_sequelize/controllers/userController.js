@@ -6,7 +6,6 @@ const { es } = require("date-fns/locale");
 // Display a listing of the resource.
 async function index(req, res) {
   const users = await User.findAll( {include: Role});
-  console.log(users.role)
   return res.render("userIndex", {
     users,
     format,
