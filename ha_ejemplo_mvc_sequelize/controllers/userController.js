@@ -1,4 +1,4 @@
-const { User, Role } = require("../models");
+const {Article, User, Role } = require("../models");
 const bcrypt = require("bcryptjs");
 const {format } = require("date-fns");
 const { es } = require("date-fns/locale");
@@ -71,20 +71,15 @@ async function update(req, res) {
       where: { id: req.params.id },
     },
   );
+  req.flash("success", "User updated")
   return res.redirect("/usuarios");
 }
 
 // Remove the specified resource from storage.
 async function destroy(req, res) {
   await User.destroy({ where: { id: req.params.id } });
-  req.flash("success", "usuario borrado con éxito");
+  req.flash("success", "usuario y artículos respectivos borrados con éxito");
   return res.redirect("/usuarios");
-}
-
-// Otros handlers...
-
-async function showWelcome(req, res) {
-  res.render("userWelcome");
 }
 
 module.exports = {
@@ -94,6 +89,5 @@ module.exports = {
   store,
   edit,
   update,
-  showWelcome,
-  destroy,
+  destroy
 };

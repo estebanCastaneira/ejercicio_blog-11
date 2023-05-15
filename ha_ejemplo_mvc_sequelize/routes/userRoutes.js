@@ -7,8 +7,8 @@ const isAdmin = require("../middleware/isAdmin");
 // ...
 
 router.get("/", ensureAuthenticated, isAdmin, userController.index);
-router.get("/registro", isAdmin, userController.create);
-router.post("/registro", isAdmin, userController.store);
+router.get("/registro", userController.create);
+router.post("/registro", userController.store);
 router.get("/:id", userController.show);
 router.get("/:id/editar", userController.edit);
 router.patch("/:id", userController.update);
