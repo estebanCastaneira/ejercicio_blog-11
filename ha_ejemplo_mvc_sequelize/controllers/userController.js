@@ -77,7 +77,9 @@ async function update(req, res) {
 
 // Remove the specified resource from storage.
 async function destroy(req, res) {
+  await Article.destroy( {where: { userId: req.params.id}});
   await User.destroy({ where: { id: req.params.id } });
+
   req.flash("success", "usuario y artículos respectivos borrados con éxito");
   return res.redirect("/usuarios");
 }
