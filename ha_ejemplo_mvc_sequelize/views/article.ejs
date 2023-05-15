@@ -19,8 +19,7 @@
       <div>
         <h1 class="mainTitle"><%= articles.title %></h1>
         <p class="text-white">
-          Creado por <%= articles.user.firstname %> <%= articles.user.lastname %> el <%=
-          articles.createdAt %>
+          Creado por <%= articles.user.firstname %> <%= articles.user.lastname %> el <%=format(new Date(String(articles.createdAt)), " dd' de 'MMMM' , 'yyyy" )  %>
         </p>
       </div>
     </div>
