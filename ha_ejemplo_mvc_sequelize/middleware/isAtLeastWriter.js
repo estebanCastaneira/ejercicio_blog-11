@@ -17,6 +17,7 @@ async function isAtLeastWriter(req, res, next){
         const article = await Article.findByPk(req.params.id);
         req.user.articles = articles;
         req.user.article = article;
+        console.log(req.user.role.id)
         return next();
     } else {
         return res.redirect("/");

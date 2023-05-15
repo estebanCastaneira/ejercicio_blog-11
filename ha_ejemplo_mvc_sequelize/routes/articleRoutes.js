@@ -13,8 +13,8 @@ const isAdmin = require("../middleware/isAdmin");
 // ...
 
 router.get("/", articleController.index);
-router.get("/crear",ensureAuthenticated, isAdmin, articleController.create);
-router.post("/", articleController.store);
+router.get("/crear",ensureAuthenticated, isAtLeastWriter, articleController.create);
+router.post("/", isAtLeastWriter, articleController.store);
 router.get("/:id", articleController.show);
 router.get("/:id/editar",ensureAuthenticated, isAtLeastWriter, isAtLeastEditor, articleController.edit);
 router.post("/:id",ensureAuthenticated, articleController.newComment);

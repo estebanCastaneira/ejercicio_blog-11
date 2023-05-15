@@ -1,7 +1,7 @@
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const { User } = require("../models");
+const { User, Role } = require("../models");
 const bcrypt = require("bcryptjs");
 const GoogleStrategy = require("passport-google-oauth2").Strategy;
 
@@ -52,7 +52,7 @@ function passportConfig() {
   });
   passport.deserializeUser(async (id, done) => {
     try {
-      const user = await User.findByPk(id , {include: "role"});
+      const user = await User.findByPk(id , {include: Role});
       return done(null, user); // Usuario queda disponible en req.user.
     } catch (err) {
       return done(err);
