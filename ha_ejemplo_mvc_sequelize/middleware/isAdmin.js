@@ -5,7 +5,7 @@ async function isAdmin(req, res, next){
       include: [
         {
           model: User,
-          attributes: ["id", "firstname", "lastname"],
+          attributes: ["id", "firstname", "lastname", "roleId"],
         },
       ],
     });

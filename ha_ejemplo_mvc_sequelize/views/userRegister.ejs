@@ -14,18 +14,30 @@
     <link type="text/css" rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <%- include("./partials/navbar.ejs") %>
     <section class="container w-50 mt-5">
+      <% if(messages.success){ %>
+        <div class="alert alert-warning">
+          <p class="m-0">
+            <%= messages.success %>
+          </p>
+        </div>
+        <% } %>
       <h1 class="text-center">User Register</h1>
       <form method="post" action="/usuarios/registro" class="border rounded p-4 shadow">
           <div class="mb-3">
+            <% if(locals.isAuthenticated) { %>
+           
             <label for="role" class="form-label">User Role</label>
             <select class="form-select" name="roleId" id="role">
-              <option value="1">Admin</option>
-              <option value="2">Editor</option>
-              <option value="3">Writer</option>
-              <option value="4">Reader</option>
+              <option value="400">Admin</option>
+              <option value="300">Editor</option>
+              <option value="200">Writer</option>
+              <option value="100">Reader</option>
             </select>
+            
+            <% } else{ %>
+              <input type="hidden" name="roleId" value="100">
+              <% } %>
           </div>
         <div class="mb-3">
           <label for="firstname" class="form-label">Firstname</label>

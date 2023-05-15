@@ -13,6 +13,14 @@
 
 <body>
     <%- include("./partials/navbar.ejs") %>
+    <% if(messages.success) { %>
+        <div class="container my-5 alert alert-success">
+            <p>
+                <%= messages.success %>
+            </p>
+        </div>
+        <% } %>
+
                 <div class="container mt-3">
                     <div class="d-flex justify-content-between">
                         <h1>Users</h1>

@@ -36,11 +36,19 @@ async function store(req, res) {
     },
   });
   if (created) {
+    if(req.isAuthenticated()){
       req.flash("success", "User created succesfully");
-      res.redirect("back");
+      return res.redirect("/usuarios");
+
+    }else{
+      req.login(user, () =>{
+      req.flash("success", "User created succesfully");
+      return res.redirect("/");
+    });
+    }  
   } else {
     req.flash("info", "User already exists, please log in");
-    res.redirect("/login");
+    return res.redirect("/login");
   }
 }
 
@@ -63,13 +71,14 @@ async function update(req, res) {
       where: { id: req.params.id },
     },
   );
-  return res.redirect("/panel");
+  return res.redirect("/usuarios");
 }
 
 // Remove the specified resource from storage.
 async function destroy(req, res) {
   await User.destroy({ where: { id: req.params.id } });
-  return res.redirect("back");
+  req.flash("success", "usuario borrado con éxito");
+  return res.redirect("/usuarios");
 }
 
 // Otros handlers...
