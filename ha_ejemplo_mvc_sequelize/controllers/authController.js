@@ -11,7 +11,7 @@ async function showLogin(req, res) {
   res.render("userLogin");
 }
 
-async function logout(req, res) {
+async function logout(req, res, next) {
   req.logout(function (error) {
     if (error) {
       return next(error);
